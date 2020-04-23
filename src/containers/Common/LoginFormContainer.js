@@ -24,7 +24,7 @@ const LoginFormContainer = () => {
     setLoading(true);
     try {
       await dispatch(loginUser(email, password));
-      return history.push('/groups');
+      return history.push('/');
     } catch (e) {
       setSubmitError(e.message);
     }

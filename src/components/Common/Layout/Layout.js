@@ -7,7 +7,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './useStyles';
 import HeaderBar from '../../../containers/Common/HeaderBarContainer';
-import Footer from '../Footer';
 import messages from './messages';
 
 const Layout = ({ children, type }) => {
@@ -35,7 +34,7 @@ const Layout = ({ children, type }) => {
                   <FormattedMessage {...messages.copyright} />
                 </Typography>
               </Box>
-              
+
             </Box>
           </Grid>
         </Grid>

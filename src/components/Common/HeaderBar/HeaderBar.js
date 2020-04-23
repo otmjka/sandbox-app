@@ -33,6 +33,7 @@ const HeaderBar = ({ isAuthenticated, logoutUser, userProfile }) => {
             <>
               <div className={classes.authGroup}>
                 <Button
+                  size="large"
                   variant="contained"
                   component={Link}
                   color="primary"
@@ -41,6 +42,7 @@ const HeaderBar = ({ isAuthenticated, logoutUser, userProfile }) => {
                   <FormattedMessage {...messages.login} />
                 </Button>
                 <Button
+                  size="large"
                   variant="contained"
                   component={Link}
                   to="/signup"
