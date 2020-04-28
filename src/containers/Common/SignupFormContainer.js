@@ -1,45 +1,29 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import SignupForm from '../../components/Common/SignupForm';
 import { signupUser } from '../../actions';
 
-function mapStateToProps(state) {
-  return {
-    isLoggingIn: state.auth.isLoggingIn,
-    loginError: state.auth.loginError,
-    isAuthenticated: state.auth.isAuthenticated
-  };
-}
-
 const SignupFormContainer = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
-  const { isLoggingIn, loginError, isAuthenticated } = useSelector(
-    mapStateToProps
-  );
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState();
 
-  const handleSubmit = async ({ email, firstName, lastName, password }) => {
+  const handleSubmit = async ({ username, email, password }) => {
     setLoading(true);
-    try {
-      const authUser = await dispatch(signupUser(email, password));
-    } catch (e) {
-      setSubmitError(e.message);
-    }
+    const error = await dispatch(signupUser({username, email, password}));
+    if (!error) return history.push('/');
+    setSubmitError(error.message);
     setLoading(false);
+    return null;
   };
-  if (isAuthenticated && !loading) {
-    return <Redirect to="/" />;
-  }
+
   return (
     <SignupForm
-      isLoggingIn={isLoggingIn}
-      loginError={loginError}
       loading={loading}
       submitError={submitError}
-      isAuthenticated={isAuthenticated}
       onSubmit={handleSubmit}
     />
   );

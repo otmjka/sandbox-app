@@ -4,18 +4,11 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   RESET_PASSWORD_SUCCESS,
-  VERIFY_REQUEST,
-  VERIFY_SUCCESS
 } from '../../actionTypes/auth';
 
 export default (
   state = {
     loading: false,
-    // isLoggingIn: false,
-    // isLoggingOut: false,
-    // isVerifying: true,
-    // loginError: false,
-    // logoutError: false,
     isAuthenticated: false,
     idToken: undefined
   },
@@ -49,12 +42,6 @@ export default (
         isAuthenticated: false,
         user: {}
       };
-    case VERIFY_REQUEST:
-      return {
-        ...state
-      };
-    case VERIFY_SUCCESS:
-      return { ...state, isVerifying: false };
     default:
       return state;
   }

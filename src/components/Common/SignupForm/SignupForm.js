@@ -13,8 +13,7 @@ import useStyles from './styles';
 
 const SignupForm = ({ loading, submitError, onSubmit }) => {
   const classes = useStyles();
-  const { register, handleSubmit, errors } = useForm();
-
+  const { register, handleSubmit, errors, getValues } = useForm();
   return (
     <>
       <Card classes={{ root: classes.cardRoot }}>
@@ -22,32 +21,17 @@ const SignupForm = ({ loading, submitError, onSubmit }) => {
         <CardContent classes={{ root: classes.contentRoot }}>
           <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
             <TextField
-              label={<FormattedMessage {...messages.firstNamePlaceholder} />}
+              label={<FormattedMessage {...messages.namePlaceholder} />}
               type="text"
               variant="outlined"
               fullWidth
-              name="firstName"
+              name="username"
               helperText={
-                !!errors.firstName && (
+                !!errors.username && (
                   <FormattedMessage {...messages.fieldRequired} />
                 )
               }
-              error={!!errors.firstName}
-              inputRef={register({ required: true })}
-            />
-            <TextField
-              label={<FormattedMessage {...messages.lastNamePlaceholder} />}
-              type="text"
-              autoComplete="current-password"
-              variant="outlined"
-              fullWidth
-              name="lastName"
-              helperText={
-                !!errors.lastName && (
-                  <FormattedMessage {...messages.fieldRequired} />
-                )
-              }
-              error={!!errors.lastName}
+              error={!!errors.username}
               inputRef={register({ required: true })}
             />
             <TextField
@@ -67,7 +51,6 @@ const SignupForm = ({ loading, submitError, onSubmit }) => {
             <TextField
               label={<FormattedMessage {...messages.passwordPlaceholder} />}
               type="password"
-              autoComplete="current-password"
               variant="outlined"
               fullWidth
               name="password"
@@ -83,17 +66,20 @@ const SignupForm = ({ loading, submitError, onSubmit }) => {
             <TextField
               label={<FormattedMessage {...messages.repasswordPlaceholder} />}
               type="password"
-              autoComplete="current-password"
               variant="outlined"
               fullWidth
-              name="password"
+              name="repassword"
               helperText={
-                !!errors.password && (
-                  <FormattedMessage {...messages.fieldRequiredAndMin6} />
+                !!errors.repassword && (
+                  <FormattedMessage {...messages.repasswordMessage} />
                 )
               }
-              error={!!errors.password}
-              inputRef={register({ /* min: 6, */ required: true })}
+              error={!!errors.repassword}
+              inputRef={register({
+                validate: {
+                  retype: value => getValues('password') === value
+                }
+              })}
             />
 
             {submitError && (

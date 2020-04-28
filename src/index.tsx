@@ -6,10 +6,10 @@ import config from './config';
 import Entrypoint from './components/Common/Entrypoint/Entrypoint';
 import configureStore from './common/configureStore';
 
-function run() {
+async function run() {
   const history = createBrowserHistory();
 
-  const store = configureStore(undefined, {
+  const store = await configureStore(undefined, {
     history
   });
 

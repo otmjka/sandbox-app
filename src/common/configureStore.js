@@ -6,7 +6,8 @@ import { verifyAuth } from '../actions';
 
 function computeEnchancers() {
   const isProduction = process.env.NODE_ENV !== 'production';
-  const reduxDevtoolsExtensionCompose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+  const reduxDevtoolsExtensionCompose =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
   const isWindowObject = typeof window === 'object';
 
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose
@@ -15,9 +16,9 @@ function computeEnchancers() {
     : compose;
 }
 
-export default function configureStoreGlobal(
+export default async function configureStoreGlobal(
   initialState = undefined,
-  { history },
+  { history }
 ) {
   const middlewares = [thunk];
   if (history) {
@@ -29,7 +30,11 @@ export default function configureStoreGlobal(
 
   const rootReducer = configureRootReducer({ history });
 
-  const store = createStore(rootReducer, initialState, composeEnhancers(...enhancers));
-  // await store.dispatch(verifyAuth());
+  const store = createStore(
+    rootReducer,
+    initialState,
+    composeEnhancers(...enhancers)
+  );
+  await store.dispatch(verifyAuth());
   return store;
 }

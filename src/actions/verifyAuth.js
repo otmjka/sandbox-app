@@ -1,14 +1,12 @@
-import { receiveLogin } from './loginUser';
-import { VERIFY_SUCCESS, VERIFY_REQUEST } from '../actionTypes/auth';
+import { loginSuccess } from './loginUser';
 
-const verifyRequest = () => ({
-  type: VERIFY_REQUEST,
-});
-
-export const verifySuccess = () => ({
-  type: VERIFY_SUCCESS,
-});
-
-const verifyAuth = () => Promise.resolve()
+const verifyAuth = () => dispatch => {
+  if (typeof window === 'object') {
+    const authStr = window.localStorage.getItem('auth');
+    const authData = JSON.parse(authStr);
+    if (!authData.idToken) return;
+    dispatch(loginSuccess(authData.idToken));
+  }
+};
 
 export default verifyAuth;
