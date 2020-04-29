@@ -3,11 +3,16 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
-  RESET_PASSWORD_SUCCESS,
 } from '../../actionTypes/auth';
 
+export type AuthState = {
+  loading: boolean,
+  isAuthenticated: boolean,
+  idToken?: string,
+}
+
 export default (
-  state = {
+  state: AuthState = {
     loading: false,
     isAuthenticated: false,
     idToken: undefined
@@ -25,7 +30,7 @@ export default (
     case LOGIN_SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         isAuthenticated: true,
         idToken: action.idToken
       };

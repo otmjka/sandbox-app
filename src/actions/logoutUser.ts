@@ -4,6 +4,8 @@ export const receiveLogout = () => ({
   type: LOGOUT_SUCCESS,
 });
 
-const logoutUser = () => async (dispatch) => Promise.resolve()
+const logoutUser = () => async (dispatch) => {
+  debugger
+}
 
 export default logoutUser;

@@ -28,4 +28,9 @@ export default defineMessages({
     id: 'Common.HeaderBar.logout',
     defaultMessage: 'Log Out',
   },
+  balanceMsg: {
+    id: 'Common.HeaderBar.balanceMsg',
+    defaultMessage: 'Balance:',
+
+  }
 });

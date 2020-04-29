@@ -4,8 +4,18 @@ import {
   FAIL_USER_DATA
 } from '../../actionTypes/user';
 
+import {UserProfile} from '../../types/user';
+
+
+export type UserState = {
+  loaded: boolean,
+  loading: boolean,
+  userData?: UserProfile,
+  errorStatus?: number,
+}
+
 export default (
-  state = {
+  state: UserState = {
     loaded: false,
     loading: false,
     userData: undefined,

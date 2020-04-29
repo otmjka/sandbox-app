@@ -1,11 +1,13 @@
 import axios from 'axios';
-import config from '../config'
+import config from '../config';
 
 import {
   START_USER_DATA,
   RECEIVE_USER_DATA,
   FAIL_USER_DATA
 } from '../actionTypes/user';
+
+import { UserProfile } from '../types/user';
 
 const baseUrl = config.common.baseUrl;
 
@@ -15,7 +17,9 @@ export const setUserData = userData => ({
 });
 
 export const getUserProfile = () => async (dispatch, getState) => {
-  const {auth: {idToken}} = getState()
+  const {
+    auth: { idToken }
+  } = getState();
 
   const userInfo = await axios.request({
     url: '/api/protected/user-info',
@@ -24,7 +28,7 @@ export const getUserProfile = () => async (dispatch, getState) => {
   });
 
   if (userInfo.status === 200) {
-    const userData = { ...userInfo.data['user_info_token'] };
+    const userData: UserProfile = { ...userInfo.data['user_info_token'] };
     dispatch(setUserData(userData));
   }
-}
+};
