@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { grey, blue, green } from '@material-ui/core/colors';
+import { purple, grey, blue, green } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
   palette: {
@@ -19,7 +19,7 @@ const theme = createMuiTheme({
   },
   appBar: {
     height: 60,
-    backgroundColor: '#041e3f' // blue[900]
+    backgroundColor: '#EA80FC',
   },
   overrides: {
     MuiInputLabel: {

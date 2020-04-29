@@ -1,15 +1,15 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {grey} from '@material-ui/core/colors';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   secondRow: {
-    backgroundColor: '#041e3f'
+    backgroundColor: theme.appBar.backgroundColor
   },
   content: {
     minHeight: 'calc(100vh - 88px)'
   },
   footerContent: {
-    color: grey[500],
+    color: grey[900],
     fontSize: 16
   }
 }));
