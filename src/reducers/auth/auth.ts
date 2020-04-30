@@ -44,6 +44,7 @@ export default (
     case LOGOUT_SUCCESS:
       return {
         ...state,
+        loading: false,
         isAuthenticated: false,
         user: {}
       };

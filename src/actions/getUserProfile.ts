@@ -1,11 +1,13 @@
 import axios from 'axios';
 import config from '../config';
+import t from 'typy';
 
 import {
   START_USER_DATA,
   RECEIVE_USER_DATA,
   FAIL_USER_DATA
 } from '../actionTypes/user';
+import logoutUser from './logoutUser';
 
 import { UserProfile } from '../types/user';
 
@@ -20,15 +22,20 @@ export const getUserProfile = () => async (dispatch, getState) => {
   const {
     auth: { idToken }
   } = getState();
+  try {
+    const userInfo = await axios.request({
+      url: '/api/protected/user-info',
+      headers: { Authorization: `Bearer ${idToken}` },
+      baseURL: `${baseUrl}`
+    });
 
-  const userInfo = await axios.request({
-    url: '/api/protected/user-info',
-    headers: { Authorization: `Bearer ${idToken}` },
-    baseURL: `${baseUrl}`
-  });
-
-  if (userInfo.status === 200) {
-    const userData: UserProfile = { ...userInfo.data['user_info_token'] };
-    dispatch(setUserData(userData));
+    if (userInfo.status === 200) {
+      const userData: UserProfile = { ...userInfo.data['user_info_token'] };
+      dispatch(setUserData(userData));
+    }
+  } catch (err) {
+    if (t(err, 'response.status').isDefined) {
+      dispatch(logoutUser());
+    }
   }
 };
