@@ -25,10 +25,6 @@ export default defineMessages({
     id: 'Common.HomeScreen.transferMoneyMsg',
     defaultMessage: 'Transfer money to a PW User'
   },
-  transactionsMsg: {
-    id: 'Common.HomeScreen.transactionsMsg',
-    defaultMessage: 'Transactions'
-  },
   repeatMsg: {
     id: 'Common.HomeScreen.repeatMsg',
     defaultMessage: 'repeat transaction'
@@ -37,5 +33,4 @@ export default defineMessages({
     id: 'Common.HomeScreen.required',
     defaultMessage: 'required'
   }
-
 });

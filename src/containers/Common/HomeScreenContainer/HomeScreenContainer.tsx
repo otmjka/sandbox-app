@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-//
+import { withSnackbar } from 'notistack';
 
 import createTransaction from '../../../actions/createTransaction';
 import { getFilteredUserList } from '../../../actions/getFilteredUserList';
@@ -12,7 +12,7 @@ import WelcomeScreen from '../../../components/Common/WelcomeScreen';
 
 import { UserRecord } from '../../../types/user';
 
-export default function HomeScreenContainer() {
+function HomeScreenContainer({enqueueSnackbar}) {
   const [loadingSend, setLoadingSend] = useState(false);
   const { isAuthenticated, users, transactions } = useSelector(mapStateToProps);
   const [selectedUser, setSelectedUser] = useState<UserRecord | null>(null);
@@ -35,6 +35,7 @@ export default function HomeScreenContainer() {
     if (error) {
       setSubmitError(error.message);
     }
+    enqueueSnackbar('PW was successfully sended!');
     setLoadingSend(false);
   }
 
@@ -52,3 +53,5 @@ export default function HomeScreenContainer() {
     />
   );
 }
+
+export default withSnackbar(HomeScreenContainer)

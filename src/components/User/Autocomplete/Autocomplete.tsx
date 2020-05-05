@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import MuiAutocomplete from '@material-ui/lab/Autocomplete';
 import { UserRecord } from '../../../types/user';
+import Button from '@material-ui/core/Button';
 
 export default function Autocomplete({
   error,
@@ -16,17 +17,16 @@ export default function Autocomplete({
 
   useEffect(() => {
     if (!initValue) return;
-    setStateValue(initValue);
     handleChangeValue(initValue)
   }, [setStateValue, initValue]);
 
   const handleChange = e => onChangeFilter(e.target.value);
   const handleChangeValue = (value: UserRecord | null) => {
+    setStateValue(value);
     setValue('user', value);
   };
   return (
     <MuiAutocomplete
-      id="combo-box-demo"
       options={users}
       getOptionLabel={option => option.name}
       value={value}
@@ -37,6 +37,8 @@ export default function Autocomplete({
       renderInput={params => (
         <TextField
           {...params}
+          helperText={error && error.user && error.user.message}
+          error={!!error}
           label={inputLabel}
           variant="outlined"
           onChange={handleChange}

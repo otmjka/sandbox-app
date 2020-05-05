@@ -25,7 +25,6 @@ export default function createTransaction({user, amount}) {
     } = getState();
     const {name} = user
     try {
-      debugger
       dispatch(startCreateTransaction());
       const userInfo = await axios.request({
         url: '/api/protected/transactions',
