@@ -14,7 +14,7 @@ import { UserRecord } from '../../../types/user';
 
 function HomeScreenContainer({enqueueSnackbar}) {
   const [loadingSend, setLoadingSend] = useState(false);
-  const { isAuthenticated, users, transactions } = useSelector(mapStateToProps);
+  const { balance, isAuthenticated, users, transactions } = useSelector(mapStateToProps);
   const [selectedUser, setSelectedUser] = useState<UserRecord | null>(null);
   const dispatch = useDispatch();
   const [submitError, setSubmitError] = useState();
@@ -45,6 +45,7 @@ function HomeScreenContainer({enqueueSnackbar}) {
 
   return (
     <HomeScreen
+      balance={balance}
       transactions={transactions}
       users={users}
       submitError={submitError}

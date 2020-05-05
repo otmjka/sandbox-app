@@ -26,59 +26,61 @@ export default function Transactions({
 }: TransactionsProps) {
   const { formatMessage } = useIntl();
   const classes = useStyles();
-  const showTransactions = !!transactions;
+  const showTransactions = transactions && !!transactions.length
   if (!showTransactions) return null;
   return (
-    <Paper>
-      <Box p={4}>
-        <Box py={2}>
-          <Typography variant="h2">
-            {formatMessage(messages.transactionsMsg)}
-          </Typography>
-        </Box>
-        <TableContainer>
-          <Table className={classes.table} aria-label="transactions">
-            <TableHead>
-              <TableRow>
-                <TableCell>№</TableCell>
-                <TableCell align="right">Date/Time</TableCell>
-                <TableCell align="right">Correspondent Name</TableCell>
-                <TableCell align="right">Transaction amount</TableCell>
-                <TableCell align="right">Resulting balance</TableCell>
-                <TableCell align="right">Repeat</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {transactions.map((row, n) => (
-                <TableRow key={row.id}>
-                  <TableCell align="right">{n}</TableCell>
-                  <TableCell align="right">{row.date}</TableCell>
-                  <TableCell align="right">{row.username}</TableCell>
-                  <TableCell align="right">{row.amount}</TableCell>
-                  <TableCell align="right">{row.balance}</TableCell>
-                  <TableCell align="right">
-                    <Button
-                      variant="contained"
-                      size="large"
-                      color="primary"
-                      type="submit"
-                      onClick={() =>
-                        onRepeat({
-                          user: { id: row.id, name: row.username },
-                          amount: Math.abs(row.amount)
-                        })
-                      }
-                    >
-                      <FormattedMessage {...messages.sendMoneyMsg} />
-                    </Button>
-                  </TableCell>
+    <Box mt={4}>
+      <Paper>
+        <Box p={4}>
+          <Box py={2}>
+            <Typography variant="h2">
+              {formatMessage(messages.transactionsMsg)}
+            </Typography>
+          </Box>
+          <TableContainer>
+            <Table className={classes.table} aria-label="transactions">
+              <TableHead>
+                <TableRow>
+                  <TableCell>№</TableCell>
+                  <TableCell align="right">Date/Time</TableCell>
+                  <TableCell align="right">Correspondent Name</TableCell>
+                  <TableCell align="right">Transaction amount</TableCell>
+                  <TableCell align="right">Resulting balance</TableCell>
+                  <TableCell align="right">Repeat</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
-    </Paper>
+              </TableHead>
+              <TableBody>
+                {transactions.map((row, n) => (
+                  <TableRow key={row.id}>
+                    <TableCell align="right">{n}</TableCell>
+                    <TableCell align="right">{row.date}</TableCell>
+                    <TableCell align="right">{row.username}</TableCell>
+                    <TableCell align="right">{row.amount}</TableCell>
+                    <TableCell align="right">{row.balance}</TableCell>
+                    <TableCell align="right">
+                      <Button
+                        variant="contained"
+                        size="large"
+                        color="primary"
+                        type="submit"
+                        onClick={() =>
+                          onRepeat({
+                            user: { id: row.id, name: row.username },
+                            amount: Math.abs(row.amount)
+                          })
+                        }
+                      >
+                        <FormattedMessage {...messages.sendMoneyMsg} />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
+      </Paper>
+    </Box>
   );
 }
 

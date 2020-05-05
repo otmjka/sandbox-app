@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Alert from '@material-ui/lab/Alert';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
 
 import TextField from '@material-ui/core/TextField';
 
@@ -15,9 +17,10 @@ import { UserRecord } from '../../../types/user';
 import { UserTransaction } from '../../../types/transactions';
 
 export default function HomeScreen({
-  users,
-  transactions,
+  balance,
   submitError,
+  transactions,
+  users,
 
   sendMoney,
   onChangeFilter
@@ -38,31 +41,35 @@ export default function HomeScreen({
   return (
     <>
       <Layout type="home">
-        <TransferForm
-          register={register}
-          handleSubmit={handleSubmit}
-          errors={errors}
-          setValue={setValue}
+        <Container maxWidth="lg" style={{ maxWidth: '970px' }}>
+        <Box mt={4}>
+          <TransferForm
+            register={register}
+            handleSubmit={handleSubmit}
+            errors={errors}
+            setValue={setValue}
 
-          users={users}
-          userInitValue={userInitValue}
-          setUserInitValue={setUserInitValue}
-          submitError={submitError}
-          sendMoney={sendMoney}
-          onChangeFilter={onChangeFilter}
-        />
-        <Transactions transactions={transactions} onRepeat={handleRepeat} />
+            balance={balance}
+            users={users}
+            userInitValue={userInitValue}
+            setUserInitValue={setUserInitValue}
+            submitError={submitError}
+            sendMoney={sendMoney}
+            onChangeFilter={onChangeFilter}
+          />
+          <Transactions transactions={transactions} onRepeat={handleRepeat} />
+          </Box>
+        </Container>
       </Layout>
     </>
   );
 }
 
 type HomeScreenProps = {
-  // selectedUser: UserRecord | null;
+  balance: number;
   transactions: UserTransaction[];
   submitError?: string;
   users: UserRecord[];
   sendMoney: (value: { user: UserRecord | null; amount: string }) => void;
-  // onChangeValue: (value: UserRecord | null) => void;
   onChangeFilter: (filter: string) => void;
 };

@@ -13,8 +13,8 @@ import Autocomplete from '../Autocomplete';
 import { UserRecord } from '../../../types/user';
 import messages from './messages';
 
-
 export default function TransferForm({
+  balance,
   users,
   submitError,
 
@@ -31,12 +31,11 @@ export default function TransferForm({
 }: TransferFormProps) {
   const { formatMessage } = useIntl();
   const classes = useStyles();
-  
+
   useEffect(() => {
     register({ name: 'user' }, { required: 'required' });
-  }, []);
-
-
+  }, [register]);
+  console.log(balance)
   return (
     <Paper>
       <Box p={4}>
@@ -80,16 +79,13 @@ export default function TransferForm({
                   min: 1,
                   validate: {
                     max: value =>
-                      parseInt(value) < 10 ||
+                      parseInt(value) <= balance ||
                       formatMessage(messages.enoughMoneyMsg)
                   }
                 })}
               />
             </Box>
-            {/*
-            disabled={loading}
-            className={classes.grow}
-          */}
+
             {submitError && (
               <Alert severity="error" classes={{ root: classes.alertRoot }}>
                 {submitError}
@@ -111,6 +107,7 @@ export default function TransferForm({
 }
 
 type TransferFormProps = {
+  balance: number;
   submitError?: string;
   users: UserRecord[];
   register: any;
@@ -120,7 +117,6 @@ type TransferFormProps = {
 
   userInitValue: any;
   setUserInitValue: any;
-
 
   sendMoney: (value: { user: UserRecord | null; amount: string }) => void;
   onChangeFilter: (filter: string) => void;
