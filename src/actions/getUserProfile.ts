@@ -13,6 +13,14 @@ import { UserProfile } from '../types/user';
 
 const baseUrl = config.common.baseUrl;
 
+export const startFetchUserProfile = () => ({
+  type: START_USER_DATA,
+})
+
+export const failFetchUserProfile = () => ({
+  type: FAIL_USER_DATA,
+})
+
 export const setUserData = userData => ({
   type: RECEIVE_USER_DATA,
   userData
@@ -20,9 +28,11 @@ export const setUserData = userData => ({
 
 export const getUserProfile = () => async (dispatch, getState) => {
   const {
-    auth: { idToken }
+    auth: { idToken, isAuthenticated }
   } = getState();
   try {
+    if (!isAuthenticated) return 
+    dispatch(startFetchUserProfile())
     const userInfo = await axios.request({
       url: '/api/protected/user-info',
       headers: { Authorization: `Bearer ${idToken}` },
@@ -35,6 +45,7 @@ export const getUserProfile = () => async (dispatch, getState) => {
     }
   } catch (err) {
     if (t(err, 'response.status').isDefined) {
+      dispatch(failFetchUserProfile())
       dispatch(logoutUser());
     }
   }

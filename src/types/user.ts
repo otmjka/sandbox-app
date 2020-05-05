@@ -4,3 +4,8 @@ export type UserProfile = {
   email: string,
   balance: number
 }
+
+export type UserRecord = {
+  id: number,
+  name: string,
+}

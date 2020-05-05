@@ -46,6 +46,7 @@ export default (
         ...state,
         loading: false,
         isAuthenticated: false,
+        idToken: undefined,
         user: {}
       };
     default:

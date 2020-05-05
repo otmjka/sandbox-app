@@ -5,6 +5,7 @@ export const receiveLogout = () => ({
 });
 
 const logoutUser = () => (dispatch) => {
+  debugger
   persistAuthInfo({})
   dispatch(receiveLogout())
 }

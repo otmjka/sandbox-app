@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { loginSuccess, loginFail } from './loginUser';
 import persistAuthInfo from './persistAuthInfo';
-import { LOGIN_SUCCESS, LOGIN_FAIL } from '../actionTypes/auth';
 import config from '../config';
 
 const baseUrl = config.common.baseUrl;

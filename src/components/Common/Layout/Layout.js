@@ -1,7 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -11,8 +10,6 @@ import messages from './messages';
 
 const Layout = ({ children, type }) => {
   const classes = useStyles();
-  const showFooter = type === 'home';
-
   return (
     <>
       <Box className={classes.content}>
