@@ -32,5 +32,9 @@ export default defineMessages({
   required: {
     id: 'Common.HomeScreen.required',
     defaultMessage: 'required'
+  },
+  loadingMsg: {
+    id: 'Common.HomeScreen.loadingMsg',
+    defaultMessage: 'loading...'
   }
 });

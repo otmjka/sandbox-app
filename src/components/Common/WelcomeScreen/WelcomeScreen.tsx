@@ -1,6 +1,5 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { useForm } from 'react-hook-form';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -8,10 +7,8 @@ import Box from '@material-ui/core/Box';
 import Layout from '../../Common/Layout';
 
 import messages from './messages';
-import useStyles from './styles';
 
 export default function HomeScreen() {
-  const classes = useStyles();
   const { formatMessage } = useIntl();
   return (
     <>

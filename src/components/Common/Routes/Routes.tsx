@@ -4,7 +4,7 @@ import HomeScreen from '../../../containers/Common/HomeScreenContainer';
 import LoginScreen from '../../Unknown/LoginScreen';
 import SignupScreen from '../../Unknown/SignupScreen';
 
-import ProtectedRoute from '../ProtectedRoute';
+// import ProtectedRoute from '../ProtectedRoute';
 // `component`s should have same values to reuse them in `Switch`
 // details are here: https://github.com/ReactTraining/react-router/issues/4578#issuecomment-282081567
 const routes = ({ isAuthenticated, isVerifying }) => (

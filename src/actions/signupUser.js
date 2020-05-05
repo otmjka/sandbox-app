@@ -17,15 +17,12 @@ const signupUser = ({ username, email, password }) => async dispatch => {
     });
     if (response.status !== 201) throw new Error({ response });
 
-    // status: 201
     const idToken = response.data['id_token'];
     dispatch(loginSuccess(idToken));
 
     persistAuthInfo({ idToken });
     return;
   } catch (err) {
-    // 400: You must send email and password.
-    // 401: Invalid email or password.
     dispatch(loginFail(err.response.status));
     return { message: err.response.data };
   }

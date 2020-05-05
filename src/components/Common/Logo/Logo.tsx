@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Typography from '@material-ui/core/Typography';
 
-import messages from './messages';
-
 const useStyles = makeStyles(() => ({
   root: {
     marginTop: '9px'

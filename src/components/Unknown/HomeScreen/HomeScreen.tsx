@@ -1,13 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Alert from '@material-ui/lab/Alert';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-
-import TextField from '@material-ui/core/TextField';
-
-import FormHelperText from '@material-ui/core/FormHelperText';
 
 import Layout from '../../Common/Layout';
 import TransferForm from '../../User/TransferForm';
@@ -17,6 +11,7 @@ import { UserRecord } from '../../../types/user';
 import { UserTransaction } from '../../../types/transactions';
 
 export default function HomeScreen({
+  loadingSend,
   balance,
   submitError,
   transactions,
@@ -44,6 +39,7 @@ export default function HomeScreen({
         <Container maxWidth="lg" style={{ maxWidth: '970px' }}>
         <Box mt={4}>
           <TransferForm
+            loadingSend={loadingSend}
             register={register}
             handleSubmit={handleSubmit}
             errors={errors}
@@ -66,6 +62,7 @@ export default function HomeScreen({
 }
 
 type HomeScreenProps = {
+  loadingSend: boolean;
   balance: number;
   transactions: UserTransaction[];
   submitError?: string;

@@ -3,7 +3,6 @@ import React, {useEffect, useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import MuiAutocomplete from '@material-ui/lab/Autocomplete';
 import { UserRecord } from '../../../types/user';
-import Button from '@material-ui/core/Button';
 
 export default function Autocomplete({
   error,
@@ -17,8 +16,9 @@ export default function Autocomplete({
 
   useEffect(() => {
     if (!initValue) return;
-    handleChangeValue(initValue)
-  }, [setStateValue, initValue]);
+    setStateValue(initValue);
+    setValue('user', initValue);
+  }, [setValue, setStateValue, initValue]);
 
   const handleChange = e => onChangeFilter(e.target.value);
   const handleChangeValue = (value: UserRecord | null) => {

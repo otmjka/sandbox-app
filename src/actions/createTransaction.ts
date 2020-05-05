@@ -2,14 +2,7 @@ import axios from 'axios';
 import config from '../config';
 import t from 'typy';
 
-import {
-  START_CREATE_TRANSACTION,
-  SUCCESSFUL_CREATE_TRANSACTION,
-  FAIL_CREATE_TRANSACTION
-} from '../actionTypes/transactions';
-
-import logoutUser from './logoutUser';
-import {getUserProfile} from './getUserProfile';
+import { getUserProfile } from './getUserProfile';
 
 import { UserTransaction } from '../types/transactions';
 import startCreateTransaction from './startCreateTransaction';
@@ -18,12 +11,12 @@ import successCreateTransaction from './successCreateTransaction';
 
 const baseUrl = config.common.baseUrl;
 
-export default function createTransaction({user, amount}) {
+export default function createTransaction({ user, amount }) {
   return async (dispatch, getState) => {
     const {
       auth: { idToken }
     } = getState();
-    const {name} = user
+    const { name } = user;
     try {
       dispatch(startCreateTransaction());
       const userInfo = await axios.request({
@@ -39,16 +32,16 @@ export default function createTransaction({user, amount}) {
           ...userInfo.data['trans_token']
         };
         dispatch(successCreateTransaction(transaction));
-        dispatch(getUserProfile())
+        dispatch(getUserProfile());
       }
     } catch (err) {
       if (t(err, 'response.status').isDefined) {
         dispatch(failCreateTransaction(err.response.status));
       }
       if (t(err, 'response.status').isDefined) {
-        return { message: err.response.data }
+        return { message: err.response.data };
       } else {
-      return { message: 'unnown error' };
+        return { message: 'unnown error' };
       }
     }
   };

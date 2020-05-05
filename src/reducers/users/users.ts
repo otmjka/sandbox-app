@@ -4,7 +4,7 @@ import {
   FAIL_FETCH_FILTERED_USER_LIST
 } from '../../actionTypes/users';
 
-import {UserProfile, UserRecord} from '../../types/user';
+import {UserRecord} from '../../types/user';
 
 export default (
   state: UsersState = {

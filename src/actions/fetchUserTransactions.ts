@@ -2,12 +2,6 @@ import axios from 'axios';
 import config from '../config';
 import t from 'typy';
 
-import {
-  START_TRANSACTIONS_DATA,
-  RECEIVE_TRANSACTIONS_DATA,
-  FAIL_TRANSACTIONS_DATA
-} from '../actionTypes/transactions';
-
 import logoutUser from './logoutUser';
 
 import { UserTransaction } from '../types/transactions';

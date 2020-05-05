@@ -10,12 +10,11 @@ import mapStateToProps from './mapStateToProps';
 import HomeScreen from '../../../components/Unknown/HomeScreen';
 import WelcomeScreen from '../../../components/Common/WelcomeScreen';
 
-import { UserRecord } from '../../../types/user';
-
-function HomeScreenContainer({enqueueSnackbar}) {
+function HomeScreenContainer({ enqueueSnackbar }) {
   const [loadingSend, setLoadingSend] = useState(false);
-  const { balance, isAuthenticated, users, transactions } = useSelector(mapStateToProps);
-  const [selectedUser, setSelectedUser] = useState<UserRecord | null>(null);
+  const { balance, isAuthenticated, users, transactions } = useSelector(
+    mapStateToProps
+  );
   const dispatch = useDispatch();
   const [submitError, setSubmitError] = useState();
 
@@ -28,16 +27,16 @@ function HomeScreenContainer({enqueueSnackbar}) {
     dispatch(getFilteredUserList(filter));
   };
 
-  const handleSendMoney = async (values) => {
-    const {user, amount} = values
+  const handleSendMoney = async values => {
+    const { user, amount } = values;
     setLoadingSend(true);
-    const error = await dispatch(createTransaction({user, amount}))
+    const error = await dispatch(createTransaction({ user, amount }));
     if (error) {
       setSubmitError(error.message);
     }
     enqueueSnackbar('PW was successfully sended!');
     setLoadingSend(false);
-  }
+  };
 
   if (!isAuthenticated) {
     return <WelcomeScreen />;
@@ -45,6 +44,7 @@ function HomeScreenContainer({enqueueSnackbar}) {
 
   return (
     <HomeScreen
+      loadingSend={loadingSend}
       balance={balance}
       transactions={transactions}
       users={users}
@@ -55,4 +55,4 @@ function HomeScreenContainer({enqueueSnackbar}) {
   );
 }
 
-export default withSnackbar(HomeScreenContainer)
+export default withSnackbar(HomeScreenContainer);

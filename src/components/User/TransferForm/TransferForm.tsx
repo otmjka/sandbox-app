@@ -14,6 +14,7 @@ import { UserRecord } from '../../../types/user';
 import messages from './messages';
 
 export default function TransferForm({
+  loadingSend,
   balance,
   users,
   submitError,
@@ -35,7 +36,6 @@ export default function TransferForm({
   useEffect(() => {
     register({ name: 'user' }, { required: 'required' });
   }, [register]);
-  console.log(balance)
   return (
     <Paper>
       <Box p={4}>
@@ -92,12 +92,14 @@ export default function TransferForm({
               </Alert>
             )}
             <Button
+              disabled={loadingSend}
               variant="contained"
               size="large"
               color="primary"
               type="submit"
             >
-              <FormattedMessage {...messages.sendMoneyMsg} />
+              {loadingSend && <FormattedMessage {...messages.loadingMsg} />}
+              {!loadingSend && <FormattedMessage {...messages.sendMoneyMsg} />}
             </Button>
           </form>
         </Box>
@@ -107,6 +109,7 @@ export default function TransferForm({
 }
 
 type TransferFormProps = {
+  loadingSend: boolean;
   balance: number;
   submitError?: string;
   users: UserRecord[];
