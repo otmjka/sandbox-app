@@ -1,7 +1,7 @@
 ## to start
 
 - clone the app
-- install dependensies
+- install dependencies
 
 ```
 cd %UR_APP%
